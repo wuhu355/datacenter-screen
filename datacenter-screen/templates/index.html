@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div class="grid-container">
+<div class="page">
 
   <!-- 标题栏 -->
   <div class="header">
@@ -29,15 +29,41 @@
     <div class="stat-card"><div class="stat-value" id="stat-health">--%</div><div class="stat-label">整体健康度</div></div>
   </div>
 
-  <!-- 左栏 -->
-  <div class="left-col">
+  <!-- ===== 主内容区 ===== -->
+
+  <!-- 全宽：CPU 趋势 -->
+  <div class="section">
+    <div class="panel panel-full">
+      <div class="panel-title">📈 CPU 使用率趋势（7天）</div>
+      <div class="chart-box" id="chart-cpu-trend"></div>
+    </div>
+  </div>
+
+  <!-- 全宽：系统负载 -->
+  <div class="section">
+    <div class="panel panel-full">
+      <div class="panel-title">📉 系统负载趋势</div>
+      <div class="chart-box" id="chart-load-trend"></div>
+    </div>
+  </div>
+
+  <!-- 并排：机房健康度 | 内存 TOP5 -->
+  <div class="section split">
     <div class="panel">
       <div class="panel-title">📍 机房健康度分布</div>
       <div class="chart-box" id="chart-room-health"></div>
     </div>
     <div class="panel">
-      <div class="panel-title">⚠ 主机风险 TOP5</div>
-      <ul class="risk-list" id="risk-list"></ul>
+      <div class="panel-title">📊 内存使用 TOP5</div>
+      <div class="chart-box" id="chart-memory-top"></div>
+    </div>
+  </div>
+
+  <!-- 并排：磁盘读写 | 磁盘使用率 -->
+  <div class="section split">
+    <div class="panel">
+      <div class="panel-title">💾 磁盘读写 TOP5</div>
+      <div class="chart-box" id="chart-disk-io"></div>
     </div>
     <div class="panel">
       <div class="panel-title">🔥 磁盘使用率 TOP5</div>
@@ -45,31 +71,19 @@
     </div>
   </div>
 
-  <!-- 中栏 -->
-  <div class="center-col">
-    <div class="panel">
-      <div class="panel-title">📈 CPU 使用率趋势（7天）</div>
-      <div class="chart-box" id="chart-cpu-trend"></div>
-    </div>
-    <div class="panel">
-      <div class="panel-title">📉 系统负载趋势</div>
-      <div class="chart-box" id="chart-load-trend"></div>
-    </div>
-    <div class="panel">
-      <div class="panel-title">💾 磁盘读写 TOP5</div>
-      <div class="chart-box" id="chart-disk-io"></div>
+  <!-- 全宽：网络流量 -->
+  <div class="section">
+    <div class="panel panel-full">
+      <div class="panel-title">🌐 网络流量</div>
+      <div class="chart-box" id="chart-network"></div>
     </div>
   </div>
 
-  <!-- 右栏 -->
-  <div class="right-col">
+  <!-- 并排：主机风险 | 告警列表 -->
+  <div class="section split">
     <div class="panel">
-      <div class="panel-title">📊 内存使用 TOP5</div>
-      <div class="chart-box" id="chart-memory-top"></div>
-    </div>
-    <div class="panel">
-      <div class="panel-title">🌐 网络流量</div>
-      <div class="chart-box" id="chart-network"></div>
+      <div class="panel-title">⚠ 主机风险 TOP5</div>
+      <ul class="risk-list" id="risk-list"></ul>
     </div>
     <div class="panel">
       <div class="panel-title">📋 告警列表</div>
