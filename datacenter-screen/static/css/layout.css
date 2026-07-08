@@ -2,14 +2,14 @@
    layout.css — 页面网格、响应式
    ============================================ */
 
-/* 三行网格：header / 统计卡片 / 图表区 */
+/* 三行网格：header / 统计卡片 / 图表区，可自由上下滚动 */
 .grid-container {
   display: grid;
-  width: 100vw; height: 100vh;
-  padding: 10px 14px;
+  width: 100%; min-height: 100vh;
+  padding: 10px 14px 30px;
   gap: 10px;
   grid-template-columns: 28fr 44fr 28fr;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto auto;
 }
 
 /* 第一行：标题栏 */
@@ -42,27 +42,23 @@
 .left-col {
   grid-column: 1; grid-row: 3;
   display: flex; flex-direction: column; gap: 10px;
-  overflow: hidden;
 }
 
 .center-col {
   grid-column: 2; grid-row: 3;
   display: flex; flex-direction: column; gap: 10px;
-  overflow: hidden;
 }
 
 .right-col {
   grid-column: 3; grid-row: 3;
   display: flex; flex-direction: column; gap: 10px;
-  overflow: hidden;
 }
 
 /* 移动端 */
 @media (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto auto;
-    padding: 6px; gap: 6px;
+    padding: 6px 6px 30px; gap: 6px;
   }
   .stat-row { flex-wrap: wrap; }
   .stat-card { min-width: 45%; }

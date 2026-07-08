@@ -20,7 +20,7 @@ body {
   background: var(--bg-deep);
   color: var(--text-main);
   font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
   user-select: none;
 }
 
