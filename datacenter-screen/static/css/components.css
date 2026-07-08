@@ -38,20 +38,20 @@
 .panel {
   background: var(--bg-panel);
   border: 1px solid var(--border); border-radius: 4px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   display: flex; flex-direction: column;
-  min-height: 300px;
+  min-height: 420px;
 }
 
-/* 全宽面板（独占一行时更高） */
+/* 全宽面板 */
 .panel-wide {
-  min-height: 380px;
+  min-height: 500px;
 }
 
 .panel-title {
   font-size: 14px; font-weight: 600; color: var(--text-main);
   padding-left: 10px; border-left: 3px solid var(--primary);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   flex-shrink: 0;
 }
 
@@ -59,10 +59,10 @@
 .chart-box {
   flex: 1;
   width: 100%;
-  min-height: 250px;
+  min-height: 370px;
 }
 .panel-wide .chart-box {
-  min-height: 330px;
+  min-height: 440px;
 }
 
 /* 主机风险排名 */
