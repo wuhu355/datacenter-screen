@@ -92,24 +92,18 @@ const baseTooltip = {
 // ECharts 颜色
 const C = ['#00d4ff','#00ff88','#ffb820','#ff4757','#bd6eff','#00e5ff','#69f0ae'];
 
-// 初始化图表
-function initChart(id) {
+// 延迟初始化图表（等页面布局完成后再创建，避免 0×0 容器）
+const _charts = {};
+function getChart(id) {
+  if (_charts[id]) return _charts[id];
   const el = document.getElementById(id);
-  if (!el) return null;
+  if (!el || el.offsetWidth === 0) return null;
   const chart = echarts.init(el);
   chart.setOption({ backgroundColor: 'transparent' });
   new ResizeObserver(() => chart.resize()).observe(el);
+  _charts[id] = chart;
   return chart;
 }
-
-// ==================== 初始化所有图表容器 ====================
-const cpuChart     = initChart('chart-cpu-trend');
-const loadChart    = initChart('chart-load-trend');
-const diskIOChart  = initChart('chart-disk-io');
-const diskTopChart = initChart('chart-disk-top');
-const memChart     = initChart('chart-memory-top');
-const netChart     = initChart('chart-network');
-const roomChart    = initChart('chart-room-health');
 
 // ==================== 实时时钟 ====================
 function tick() {
@@ -138,8 +132,10 @@ function renderStats(data) {
 
 // 2. 机房健康度 — 雷达图
 function renderRoomHealth(data) {
-  if (!roomChart) return;
-  roomChart.setOption({
+  const chart = getChart('chart-room-health');
+  if (!chart) return;
+  chart.resize();
+  chart.setOption({
     tooltip: baseTooltip,
     legend: { bottom: 0, textStyle: { color: '#8892b0', fontSize: 10 } },
     radar: {
@@ -184,8 +180,10 @@ function renderHostRisk(data) {
 
 // 4. 磁盘使用率 TOP5 — 水平柱状图
 function renderDiskTop(data) {
-  if (!diskTopChart) return;
-  diskTopChart.setOption({
+  const chart = getChart('chart-disk-top');
+  if (!chart) return;
+  chart.resize();
+  chart.setOption({
     tooltip: baseTooltip,
     grid: { ...baseGrid, left: 100 },
     xAxis: { type: 'value', name: '%', axisLabel: { color: '#8892b0', fontSize: 10 },
@@ -212,8 +210,10 @@ function renderDiskTop(data) {
 
 // 5. CPU 趋势 — 折线图
 function renderCPUTrend(data) {
-  if (!cpuChart) return;
-  cpuChart.setOption({
+  const chart = getChart('chart-cpu-trend');
+  if (!chart) return;
+  chart.resize();
+  chart.setOption({
     tooltip: { ...baseTooltip, trigger: 'axis' },
     legend: { top: 0, textStyle: { color: '#8892b0', fontSize: 10 },
               itemWidth: 12, itemHeight: 6, data: ['user','sys','wait','idle','usage'] },
@@ -236,8 +236,10 @@ function renderCPUTrend(data) {
 
 // 6. 负载趋势 — 面积图
 function renderLoadTrend(data) {
-  if (!loadChart) return;
-  loadChart.setOption({
+  const chart = getChart('chart-load-trend');
+  if (!chart) return;
+  chart.resize();
+  chart.setOption({
     tooltip: { ...baseTooltip, trigger: 'axis' },
     legend: { top: 0, textStyle: { color: '#8892b0', fontSize: 10 }, itemWidth: 12, itemHeight: 6 },
     grid: { ...baseGrid, top: 40 },
@@ -259,8 +261,10 @@ function renderLoadTrend(data) {
 
 // 7. 磁盘读写 TOP5 — 堆叠柱状图
 function renderDiskIO(data) {
-  if (!diskIOChart) return;
-  diskIOChart.setOption({
+  const chart = getChart('chart-disk-io');
+  if (!chart) return;
+  chart.resize();
+  chart.setOption({
     tooltip: { ...baseTooltip, trigger: 'axis' },
     legend: { top: 0, textStyle: { color: '#8892b0', fontSize: 10 }, itemWidth: 12, itemHeight: 6 },
     grid: { ...baseGrid, top: 40 },
@@ -280,8 +284,10 @@ function renderDiskIO(data) {
 
 // 8. 内存使用 TOP5 — 水平柱状图
 function renderMemoryTop(data) {
-  if (!memChart) return;
-  memChart.setOption({
+  const chart = getChart('chart-memory-top');
+  if (!chart) return;
+  chart.resize();
+  chart.setOption({
     tooltip: { ...baseTooltip, formatter: p => p.name + '<br/>' + p.value + ' MB' },
     grid: { ...baseGrid, left: 100 },
     xAxis: { type: 'value', name: 'MB', axisLabel: { color: '#8892b0', fontSize: 10 },
@@ -308,8 +314,10 @@ function renderMemoryTop(data) {
 
 // 9. 网络流量 — 双 Y 轴折线图
 function renderNetwork(data) {
-  if (!netChart) return;
-  netChart.setOption({
+  const chart = getChart('chart-network');
+  if (!chart) return;
+  chart.resize();
+  chart.setOption({
     tooltip: { ...baseTooltip, trigger: 'axis' },
     legend: { top: 0, textStyle: { color: '#8892b0', fontSize: 10 }, itemWidth: 12, itemHeight: 6 },
     grid: { ...baseGrid, top: 40 },
@@ -368,9 +376,13 @@ async function loadAll() {
   }
 }
 
-// 首次加载 + 每 10 秒刷新
-loadAll();
-setInterval(loadAll, 10000);
+// 等页面布局完成后首次加载，之后每 10 秒刷新
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    loadAll();
+    setInterval(loadAll, 10000);
+  });
+});
 </script>
 
 </body>
