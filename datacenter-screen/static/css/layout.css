@@ -1,5 +1,5 @@
 /* ============================================
-   layout.css — 顶部全宽 + 图表区居中
+   layout.css — 顶部全宽 + 图表区自适应两列
    ============================================ */
 
 /* === 顶部：全宽标题栏 === */
@@ -26,32 +26,33 @@
   display: flex; gap: 10px; padding: 0 16px; margin-bottom: 14px;
 }
 
-/* === 图表区：居中容器 === */
+/* === 图表区：居中，两列自适应 === */
 .page {
-  max-width: 1260px;
+  width: 88%;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 0 18px 50px;
+  padding: 0 0 50px;
 }
 
-/* 内容区块 */
-.section {
-  margin-bottom: 12px;
-}
-
-/* 并排：50/50 */
-.section.split {
+/* 默认两列 */
+.content-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
 }
 
-/* 移动端 */
+/* 全宽项横跨两列 */
+.content-grid .full {
+  grid-column: 1 / -1;
+}
+
+/* 移动端：全部单列 */
 @media (max-width: 768px) {
   .header { flex-direction: column; height: auto; gap: 4px; padding: 0 8px; }
   .header-title { font-size: 20px; }
   .stat-row { flex-wrap: wrap; padding: 0 6px; }
   .stat-card { min-width: 45%; }
   .stat-value { font-size: 22px; }
-  .page { padding: 0 8px 30px; }
-  .section.split { grid-template-columns: 1fr; }
+  .page { width: 100%; padding: 0 8px 30px; }
+  .content-grid { grid-template-columns: 1fr; }
 }

@@ -27,66 +27,66 @@
     <div class="stat-card"><div class="stat-value" id="stat-health">--%</div><div class="stat-label">整体健康度</div></div>
   </div>
 
-  <!-- 图表区 — 居中容器 -->
+  <!-- 图表区 — 居中，两列网格 -->
   <div class="page">
+  <div class="content-grid">
 
-  <!-- 1. CPU 趋势 — 全宽，最重要 -->
-  <div class="section">
-    <div class="panel panel-wide">
+    <!-- CPU 趋势 — 全宽 -->
+    <div class="full"><div class="panel panel-wide">
       <div class="panel-title">📈 CPU 使用率趋势（7天）</div>
       <div class="chart-box" id="chart-cpu-trend"></div>
-    </div>
-  </div>
+    </div></div>
 
-  <!-- 2. 系统负载 | 网络流量 -->
-  <div class="section split">
+    <!-- 系统负载 -->
     <div class="panel">
       <div class="panel-title">📉 系统负载趋势</div>
       <div class="chart-box" id="chart-load-trend"></div>
     </div>
+
+    <!-- 网络流量 -->
     <div class="panel">
       <div class="panel-title">🌐 网络流量</div>
       <div class="chart-box" id="chart-network"></div>
     </div>
-  </div>
 
-  <!-- 3. 机房健康 | 内存 TOP5 -->
-  <div class="section split">
+    <!-- 机房健康 -->
     <div class="panel">
       <div class="panel-title">📍 机房健康度分布</div>
       <div class="chart-box" id="chart-room-health"></div>
     </div>
+
+    <!-- 内存 TOP5 -->
     <div class="panel">
       <div class="panel-title">📊 内存使用 TOP5</div>
       <div class="chart-box" id="chart-memory-top"></div>
     </div>
-  </div>
 
-  <!-- 4. 磁盘读写 | 磁盘使用率 -->
-  <div class="section split">
+    <!-- 磁盘读写 -->
     <div class="panel">
       <div class="panel-title">💾 磁盘读写 TOP5</div>
       <div class="chart-box" id="chart-disk-io"></div>
     </div>
+
+    <!-- 磁盘使用率 -->
     <div class="panel">
       <div class="panel-title">🔥 磁盘使用率 TOP5</div>
       <div class="chart-box" id="chart-disk-top"></div>
     </div>
-  </div>
 
-  <!-- 5. 主机风险 | 告警列表 -->
-  <div class="section split">
+    <!-- 主机风险 -->
     <div class="panel">
       <div class="panel-title">⚠ 主机风险 TOP5</div>
       <ul class="risk-list" id="risk-list"></ul>
     </div>
+
+    <!-- 告警列表 -->
     <div class="panel">
       <div class="panel-title">📋 告警列表</div>
       <ul class="alert-list" id="alert-list"></ul>
     </div>
-  </div>
 
-</div>
+  </div>
+  </div>
 
 <script src="/static/js/api.js"></script>
 <script src="/static/js/charts.js"></script>
