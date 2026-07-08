@@ -1,0 +1,176 @@
+/* ============================================
+   datacenter-screen — 暗色大屏皮肤
+   ============================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-deep:    #0a0e27;
+  --bg-panel:   #111640;
+  --border:     #1e2a5a;
+  --primary:    #00d4ff;
+  --success:    #00ff88;
+  --warning:    #ffb820;
+  --danger:     #ff4757;
+  --text-main:  #e0e6f0;
+  --text-sub:   #8892b0;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ---- 整体网格 ---- */
+.grid-container {
+  display: grid;
+  width: 100vw; height: 100vh;
+  padding: 10px 14px;
+  gap: 10px;
+  grid-template-columns: 28fr 44fr 28fr;
+  grid-template-rows: 90px 1fr;
+}
+
+/* ---- 顶部 ---- */
+.header {
+  grid-column: 1 / -1; grid-row: 1;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+}
+
+.header-title {
+  font-size: 30px; font-weight: 700;
+  background: linear-gradient(90deg, var(--primary), var(--success));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 3px;
+}
+
+.header-time {
+  font-size: 18px; color: var(--primary);
+  font-family: 'Courier New', monospace;
+}
+
+/* ---- 统计卡片行 ---- */
+.stat-row {
+  grid-column: 1 / -1; grid-row: 2;
+  display: flex; gap: 10px; height: 90px;
+  position: absolute; top: 95px; left: 14px; right: 14px; z-index: 10;
+}
+
+.stat-card {
+  flex: 1;
+  background: linear-gradient(180deg, rgba(0,212,255,0.08), var(--bg-panel));
+  border: 1px solid var(--border); border-radius: 4px;
+  padding: 12px 16px; position: relative;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.stat-card::before {
+  content: ''; position: absolute; top: 0; left: 20%; right: 20%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.stat-value {
+  font-size: 32px; font-weight: 700; color: var(--primary);
+  font-family: 'Courier New', monospace;
+}
+.stat-value.danger  { color: var(--danger); }
+.stat-value.success { color: var(--success); }
+.stat-value.warning { color: var(--warning); }
+
+.stat-label { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+
+/* ---- 三列内容区（向下偏移给统计卡片留空间）---- */
+.left-col   { grid-column: 1; grid-row: 2; margin-top: 100px; display: flex; flex-direction: column; gap: 10px; }
+.center-col { grid-column: 2; grid-row: 2; margin-top: 100px; display: flex; flex-direction: column; gap: 10px; }
+.right-col  { grid-column: 3; grid-row: 2; margin-top: 100px; display: flex; flex-direction: column; gap: 10px; }
+
+/* ---- 面板容器 ---- */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border); border-radius: 4px;
+  padding: 10px 12px; position: relative;
+  flex: 1;
+}
+.panel-title {
+  font-size: 14px; font-weight: 600; color: var(--text-main);
+  padding-left: 10px; border-left: 3px solid var(--primary);
+  margin-bottom: 6px;
+}
+
+/* ---- 主机风险排名 ---- */
+.risk-list { list-style: none; }
+.risk-item {
+  display: flex; align-items: center; padding: 6px 0;
+  border-bottom: 1px solid rgba(30,42,90,0.4); font-size: 13px;
+}
+.risk-rank {
+  width: 22px; height: 22px; line-height: 22px; text-align: center;
+  border-radius: 4px; font-weight: 700; font-size: 12px; margin-right: 8px;
+}
+.risk-rank.r1 { background: var(--danger); color: #fff; }
+.risk-rank.r2 { background: var(--warning); color: #111; }
+.risk-rank.r3 { background: var(--primary); color: #111; }
+.risk-rank.r4, .risk-rank.r5 { background: var(--border); color: var(--text-sub); }
+
+.risk-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.risk-bar {
+  width: 80px; height: 6px; background: rgba(30,42,90,0.4);
+  border-radius: 3px; margin-left: 8px; overflow: hidden;
+}
+.risk-bar-fill { height: 100%; border-radius: 3px; }
+.risk-score { width: 40px; text-align: right; font-size: 12px; color: var(--text-sub); margin-left: 6px; }
+
+/* ---- 告警列表 ---- */
+.alert-list { list-style: none; overflow: hidden; height: calc(100% - 28px); }
+.alert-item {
+  display: flex; align-items: center; padding: 7px 8px; font-size: 12px;
+  border-bottom: 1px solid rgba(30,42,90,0.3);
+  animation: alertIn 0.5s ease;
+}
+.alert-dot {
+  width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; flex-shrink: 0;
+}
+.alert-dot.critical { background: var(--danger); animation: blink 1s infinite; }
+.alert-dot.warning  { background: var(--warning); }
+.alert-dot.resolved { background: var(--success); }
+.alert-msg { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.alert-time { color: var(--text-sub); margin-left: 8px; flex-shrink: 0; }
+
+/* ---- 图表容器 ---- */
+.chart-box { width: 100%; flex: 1; min-height: 0; }
+
+/* ---- 动画 ---- */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stat-card { animation: fadeInUp 0.5s ease forwards; }
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+.stat-card:nth-child(5) { animation-delay: 0.5s; }
+.stat-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* ---- 移动端 ---- */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    padding: 6px; gap: 6px;
+  }
+  .stat-row { position: static; flex-wrap: wrap; height: auto; }
+  .stat-card { min-width: 45%; }
+  .stat-value { font-size: 22px; }
+  .left-col, .center-col, .right-col { grid-column: 1; margin-top: 0; }
+  .header-title { font-size: 20px; }
+}
