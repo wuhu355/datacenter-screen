@@ -1,17 +1,22 @@
 /* ============================================
-   layout.css — 单列信息流，可滚动
+   layout.css — 页面网格、响应式
    ============================================ */
 
-.page {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 14px 18px 40px;
+/* 三行网格：header / 统计卡片 / 图表区，可自由上下滚动 */
+.grid-container {
+  display: grid;
+  width: 100%; min-height: 100vh;
+  padding: 10px 14px 30px;
+  gap: 10px;
+  grid-template-columns: 28fr 44fr 28fr;
+  grid-template-rows: auto auto auto;
 }
 
-/* 标题栏 */
+/* 第一行：标题栏 */
 .header {
+  grid-column: 1 / -1; grid-row: 1;
   display: flex; align-items: center; justify-content: space-between;
-  height: 44px; margin-bottom: 12px;
+  padding: 0 20px; height: 40px;
 }
 
 .header-title {
@@ -27,40 +32,37 @@
   font-family: 'Courier New', monospace;
 }
 
-/* 统计卡片 */
+/* 第二行：统计卡片 */
 .stat-row {
-  display: flex; gap: 10px; margin-bottom: 14px;
+  grid-column: 1 / -1; grid-row: 2;
+  display: flex; gap: 10px;
 }
 
-/* 内容区块 */
-.section {
-  margin-bottom: 12px;
+/* 第三行：三列图表区 */
+.left-col {
+  grid-column: 1; grid-row: 3;
+  display: flex; flex-direction: column; gap: 10px;
 }
 
-/* 并排区块 */
-.section.split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+.center-col {
+  grid-column: 2; grid-row: 3;
+  display: flex; flex-direction: column; gap: 10px;
 }
 
-/* 全宽面板比并排的高一些 */
-.panel-full {
-  min-height: 380px;
-}
-.panel-full .chart-box {
-  min-height: 340px;
+.right-col {
+  grid-column: 3; grid-row: 3;
+  display: flex; flex-direction: column; gap: 10px;
 }
 
-/* 移动端：全部单列 */
+/* 移动端 */
 @media (max-width: 768px) {
-  .page { padding: 8px 8px 30px; }
-  .header { flex-direction: column; height: auto; gap: 4px; }
-  .header-title { font-size: 20px; }
+  .grid-container {
+    grid-template-columns: 1fr;
+    padding: 6px 6px 30px; gap: 6px;
+  }
   .stat-row { flex-wrap: wrap; }
   .stat-card { min-width: 45%; }
   .stat-value { font-size: 22px; }
-  .section.split { grid-template-columns: 1fr; }
-  .panel-full { min-height: 300px; }
-  .panel-full .chart-box { min-height: 260px; }
+  .left-col, .center-col, .right-col { grid-column: 1; }
+  .header-title { font-size: 18px; }
 }
