@@ -30,7 +30,7 @@
   <!-- 图表区 — 居中容器 -->
   <div class="page">
 
-  <!-- 1. CPU 趋势 — 全宽 -->
+  <!-- 1. CPU 趋势 — 全宽，最重要 -->
   <div class="section">
     <div class="panel panel-wide">
       <div class="panel-title">📈 CPU 使用率趋势（7天）</div>
@@ -38,15 +38,19 @@
     </div>
   </div>
 
-  <!-- 2. 系统负载 — 全宽 -->
-  <div class="section">
-    <div class="panel panel-wide">
+  <!-- 2. 系统负载 | 网络流量 -->
+  <div class="section split">
+    <div class="panel">
       <div class="panel-title">📉 系统负载趋势</div>
       <div class="chart-box" id="chart-load-trend"></div>
     </div>
+    <div class="panel">
+      <div class="panel-title">🌐 网络流量</div>
+      <div class="chart-box" id="chart-network"></div>
+    </div>
   </div>
 
-  <!-- 3. 机房健康 | 内存 TOP5 — 并排 -->
+  <!-- 3. 机房健康 | 内存 TOP5 -->
   <div class="section split">
     <div class="panel">
       <div class="panel-title">📍 机房健康度分布</div>
@@ -58,7 +62,7 @@
     </div>
   </div>
 
-  <!-- 4. 磁盘读写 | 磁盘使用率 — 并排 -->
+  <!-- 4. 磁盘读写 | 磁盘使用率 -->
   <div class="section split">
     <div class="panel">
       <div class="panel-title">💾 磁盘读写 TOP5</div>
@@ -70,15 +74,7 @@
     </div>
   </div>
 
-  <!-- 5. 网络流量 — 全宽 -->
-  <div class="section">
-    <div class="panel panel-wide">
-      <div class="panel-title">🌐 网络流量</div>
-      <div class="chart-box" id="chart-network"></div>
-    </div>
-  </div>
-
-  <!-- 6. 主机风险 | 告警列表 — 并排 -->
+  <!-- 5. 主机风险 | 告警列表 -->
   <div class="section split">
     <div class="panel">
       <div class="panel-title">⚠ 主机风险 TOP5</div>
