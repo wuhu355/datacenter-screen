@@ -1,0 +1,36 @@
+/* ============================================
+   theme.css — 色彩、字体、动画
+   ============================================ */
+
+:root {
+  --bg-deep:    #0a0e27;
+  --bg-panel:   #111640;
+  --border:     #1e2a5a;
+  --primary:    #00d4ff;
+  --success:    #00ff88;
+  --warning:    #ffb820;
+  --danger:     #ff4757;
+  --text-main:  #e0e6f0;
+  --text-sub:   #8892b0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* 动画 */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

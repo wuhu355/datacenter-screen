@@ -1,0 +1,72 @@
+/* ============================================
+   layout.css — 页面网格、响应式
+   ============================================ */
+
+/* 三行网格：header / 统计卡片 / 图表区 */
+.grid-container {
+  display: grid;
+  width: 100vw; height: 100vh;
+  padding: 10px 14px;
+  gap: 10px;
+  grid-template-columns: 28fr 44fr 28fr;
+  grid-template-rows: auto auto 1fr;
+}
+
+/* 第一行：标题栏 */
+.header {
+  grid-column: 1 / -1; grid-row: 1;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 40px;
+}
+
+.header-title {
+  font-size: 28px; font-weight: 700;
+  background: linear-gradient(90deg, var(--primary), var(--success));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 3px;
+}
+
+.header-time {
+  font-size: 17px; color: var(--primary);
+  font-family: 'Courier New', monospace;
+}
+
+/* 第二行：统计卡片 */
+.stat-row {
+  grid-column: 1 / -1; grid-row: 2;
+  display: flex; gap: 10px;
+}
+
+/* 第三行：三列图表区 */
+.left-col {
+  grid-column: 1; grid-row: 3;
+  display: flex; flex-direction: column; gap: 10px;
+  overflow: hidden;
+}
+
+.center-col {
+  grid-column: 2; grid-row: 3;
+  display: flex; flex-direction: column; gap: 10px;
+  overflow: hidden;
+}
+
+.right-col {
+  grid-column: 3; grid-row: 3;
+  display: flex; flex-direction: column; gap: 10px;
+  overflow: hidden;
+}
+
+/* 移动端 */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    padding: 6px; gap: 6px;
+  }
+  .stat-row { flex-wrap: wrap; }
+  .stat-card { min-width: 45%; }
+  .stat-value { font-size: 22px; }
+  .left-col, .center-col, .right-col { grid-column: 1; }
+  .header-title { font-size: 18px; }
+}
