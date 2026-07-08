@@ -5,6 +5,7 @@ work/
 *.png
 *.jpg
 img/
+!datacenter-screen/docs/image.png
 
 # Temp files
 query_results_sample.txt
