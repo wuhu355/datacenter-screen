@@ -40,7 +40,12 @@
   border: 1px solid var(--border); border-radius: 4px;
   padding: 10px 12px;
   display: flex; flex-direction: column;
-  min-height: 320px;
+  min-height: 300px;
+}
+
+/* 全宽面板（独占一行时更高） */
+.panel-wide {
+  min-height: 380px;
 }
 
 .panel-title {
@@ -54,11 +59,14 @@
 .chart-box {
   flex: 1;
   width: 100%;
-  min-height: 260px;
+  min-height: 250px;
+}
+.panel-wide .chart-box {
+  min-height: 330px;
 }
 
 /* 主机风险排名 */
-.risk-list { list-style: none; flex: 1; min-height: 200px; }
+.risk-list { list-style: none; flex: 1; }
 .risk-item {
   display: flex; align-items: center; padding: 6px 0;
   border-bottom: 1px solid rgba(30,42,90,0.4); font-size: 13px;
