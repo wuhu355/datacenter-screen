@@ -1,0 +1,35 @@
+# Data files (too large, already in MySQL)
+work/
+
+# Images
+*.png
+*.jpg
+img/
+
+# Temp files
+query_results_sample.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MySQL data
+*.sql
+!init.sql
+
+# Docker (don't commit container data)
+mysql-data/
+
+# Node (if any)
+node_modules/
