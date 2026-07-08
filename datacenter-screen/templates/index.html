@@ -11,14 +11,16 @@
 </head>
 <body>
 
-  <!-- 标题栏 — 全宽 -->
+<div class="page">
+
+  <!-- 标题栏 -->
   <div class="header">
     <span class="header-title">🖥 数据中心运行监控大屏</span>
     <span class="header-time" id="live-time">----&#45;&#45;-- --:--:--</span>
   </div>
 
-  <!-- 统计卡片 — 全宽 -->
-  <div class="stat-row">
+  <!-- 统计卡片 — 3×2 网格 -->
+  <div class="stat-grid">
     <div class="stat-card"><div class="stat-value" id="stat-hosts">--</div><div class="stat-label">主机总数</div></div>
     <div class="stat-card"><div class="stat-value success" id="stat-online">--</div><div class="stat-label">在线主机</div></div>
     <div class="stat-card"><div class="stat-value" id="stat-mods">--</div><div class="stat-label">指标项数</div></div>
@@ -27,8 +29,7 @@
     <div class="stat-card"><div class="stat-value" id="stat-health">--%</div><div class="stat-label">整体健康度</div></div>
   </div>
 
-  <!-- 图表区 — 居中，两列网格 -->
-  <div class="page">
+  <!-- 图表区 -->
   <div class="content-grid">
 
     <!-- CPU 趋势 — 全宽 -->
@@ -86,7 +87,8 @@
     </div>
 
   </div>
-  </div>
+
+</div>
 
 <script src="/static/js/api.js"></script>
 <script src="/static/js/charts.js"></script>

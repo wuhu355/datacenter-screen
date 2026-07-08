@@ -1,11 +1,18 @@
 /* ============================================
-   layout.css — 顶部全宽 + 图表区自适应两列
+   layout.css — 居中统一容器
    ============================================ */
 
-/* === 顶部：全宽标题栏 === */
+.page {
+  width: 88%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 14px 0 50px;
+}
+
+/* === 标题栏 === */
 .header {
   display: flex; align-items: center; justify-content: space-between;
-  height: 44px; padding: 0 20px; margin-bottom: 12px;
+  height: 44px; margin-bottom: 14px;
 }
 
 .header-title {
@@ -21,38 +28,31 @@
   font-family: 'Courier New', monospace;
 }
 
-/* === 顶部：全宽统计卡片 === */
-.stat-row {
-  display: flex; gap: 10px; padding: 0 16px; margin-bottom: 14px;
+/* === 统计卡片 — 3列×2行 === */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
-/* === 图表区：居中，两列自适应 === */
-.page {
-  width: 88%;
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 0 0 50px;
-}
-
-/* 默认两列 */
+/* === 图表区 — 两列 + 全宽跨列 === */
 .content-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
 
-/* 全宽项横跨两列 */
 .content-grid .full {
   grid-column: 1 / -1;
 }
 
-/* 移动端：全部单列 */
+/* === 移动端 === */
 @media (max-width: 768px) {
-  .header { flex-direction: column; height: auto; gap: 4px; padding: 0 8px; }
+  .page { width: 100%; padding: 8px 8px 30px; }
+  .header { flex-direction: column; height: auto; gap: 4px; }
   .header-title { font-size: 20px; }
-  .stat-row { flex-wrap: wrap; padding: 0 6px; }
-  .stat-card { min-width: 45%; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .stat-value { font-size: 22px; }
-  .page { width: 100%; padding: 0 8px 30px; }
   .content-grid { grid-template-columns: 1fr; }
 }
